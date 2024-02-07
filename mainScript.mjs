@@ -4,4 +4,5 @@ const array = [21, 6513, 5, 33, 1, 5, 2, 4, 3, 1000, 7, 51, 6, 0];
 const test = new Tree(array);
 
 //console.log(test.root);
-test.prettyPrint(test.root);
+test.insert(8);
+test.prettyPrint();

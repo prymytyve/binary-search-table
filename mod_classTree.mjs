@@ -19,7 +19,8 @@ export default class Tree {
     return node;
   };
 
-  prettyPrint = (node, prefix = "", isLeft = true) => {
+  prettyPrint = (node = this.root, prefix = "", isLeft = true) => {
+    //courtesy of The Odin Project
     if (node === null) {
       return;
     }
@@ -41,6 +42,47 @@ export default class Tree {
       );
     }
   };
-  // insert = (value) => {};
-  // delete = (value) => {};
+
+  insertFail = (val) => {
+    let temp = this.root;
+    while (temp !== null) {
+      if (val < temp.data) {
+        temp = temp.left;
+      } else if (val > temp.data) {
+        temp = temp.right;
+      } else if (val === temp.data) {
+        console.log("Dupes are not permitted!");
+        return;
+      }
+    }
+    temp = new Node(val);
+  };
+
+  // insert = (val, node = this.root) => {
+  //   if (node === null) {
+  //     node = new Node(val);
+  //   } else if (val === node.data) {
+  //     console.log("Beware of Dupes!");
+  //   } else {
+  //     let temp;
+  //     val < node.data ? (temp = node.left) : (temp = node.right);
+  //     this.insert.call(this, val, temp);
+  //   }
+  // };
+
+  insert = (val, node = this.root) => {
+    if (val === node.data) {
+      console.log("Beware of Dupes!");
+    } else if (val < node.data) {
+      node.left === null
+        ? (node.left = new Node(val))
+        : this.insert.call(this, val, node.left);
+    } else if (val > node.data) {
+      node.right === null
+        ? (node.right = new Node(val))
+        : this.insert.call(this, val, node.right);
+    } else if (val === undefined || typeof val !== "number") {
+      console.log("Missing value or incorrect value");
+    }
+  };
 }
