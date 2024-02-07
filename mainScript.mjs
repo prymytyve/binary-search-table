@@ -1,6 +1,7 @@
-import Tree from "./mode_classTree.mjs";
+import Tree from "./mod_classTree.mjs";
 
-const array = [1, 2, 3, 4, 5];
+const array = [21, 6513, 5, 33, 1, 5, 2, 4, 3, 1000, 7, 51, 6, 0];
 const test = new Tree(array);
 
-console.log(test);
+//console.log(test.root);
+test.prettyPrint(test.root);
