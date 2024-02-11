@@ -59,19 +59,6 @@ export default class Tree {
     }
   };
 
-  traversal = (val, node = this.root) => {
-    if (val < node.data && node.left !== null) {
-      return this.traversal.call(this, val, node.left);
-    } else if (val > node.data && node.right !== null) {
-      return this.traversal.call(this, val, node.right);
-    } else if (val === node.data) {
-      return node;
-    } else {
-      console.log("Value not Found");
-      return;
-    }
-  };
-
   next = (val, node) => {
     val < node.data ? (node = node.left) : (node = node.right);
     return node;
@@ -125,7 +112,21 @@ export default class Tree {
     else if (val !== node.data) {
       let parent = node;
       let child = this.next.call(this, val, node);
-      this.delete.call(this, val, child, parent);
+      child !== null
+        ? this.delete.call(this, val, child, parent)
+        : console.log("Value not found");
+    }
+  };
+
+  find = (val, node = this.root) => {
+    if (val < node.data && node.left !== null) {
+      return this.find.call(this, val, node.left);
+    } else if (val > node.data && node.right !== null) {
+      return this.find.call(this, val, node.right);
+    } else if (val === node.data) {
+      console.log(node);
+    } else {
+      console.log("Value not Found");
     }
   };
 }

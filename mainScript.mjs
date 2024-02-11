@@ -6,7 +6,7 @@ const array2 = [6, 3];
 const array3 = [6];
 const test = new Tree(array);
 
-// console.log(test.root);
 // test.insert(8);
 test.delete();
 test.prettyPrint();
+// test.find(1);
