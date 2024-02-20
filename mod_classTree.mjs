@@ -129,4 +129,21 @@ export default class Tree {
       console.log("Value not Found");
     }
   };
+
+  levelOrder = (callback) => {
+    if (this.root === null) return;
+    let queue = [];
+    let returnVal = [];
+    queue.push(this.root);
+    while (queue.length > 0) {
+      let currentNode = queue[0];
+      if (currentNode.left !== null) queue.push(currentNode.left);
+      if (currentNode.right !== null) queue.push(currentNode.right);
+      let departingNode = queue.shift();
+      callback !== undefined
+        ? callback(departingNode)
+        : returnVal.push(departingNode.data);
+    }
+    if (callback === undefined) console.log(returnVal);
+  };
 }
