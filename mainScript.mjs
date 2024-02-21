@@ -12,7 +12,10 @@ const test = new Tree(array);
 // test.find(6);
 // test.levelOrder();
 // test.levelOrder(callbackFunc);
+// test.levelOrderRec();
+// test.levelOrderRec(callbackFunc);
 
+///////////////Misc functions////////////////////////
 function callbackFunc(node) {
-  console.log(node.data + 1);
+  console.log(node.data);
 }

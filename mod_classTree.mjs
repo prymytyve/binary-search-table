@@ -7,6 +7,7 @@ export default class Tree {
   }
 
   buildTree = (array) => {
+    if (!array) return null;
     let arr = handler(array);
     if (arr.length <= 0) return null;
     let mid = Math.floor(arr.length / 2);
@@ -145,5 +146,26 @@ export default class Tree {
         : returnVal.push(departingNode.data);
     }
     if (callback === undefined) console.log(returnVal);
+  };
+
+  levelOrderRec = (callback) => {
+    if (this.root === null) return;
+    let queue = [this.root];
+    let returnArr = [];
+
+    let recursion = (q) => {
+      if (!q.length) return;
+      let currentNode = q[0];
+      if (currentNode.left !== null) q.push(currentNode.left);
+      if (currentNode.right !== null) q.push(currentNode.right);
+      let departingNode = q.shift();
+      callback !== undefined
+        ? callback(departingNode)
+        : returnArr.push(departingNode.data);
+      recursion(q);
+    };
+
+    recursion(queue);
+    if (callback === undefined) console.log(returnArr);
   };
 }
