@@ -8,14 +8,20 @@ const test = new Tree(array);
 
 // test.insert(8);
 // test.delete();
-// test.prettyPrint();
+test.prettyPrint();
 // test.find(6);
 // test.levelOrder();
 // test.levelOrder(callbackFunc);
 // test.levelOrderRec();
 // test.levelOrderRec(callbackFunc);
+console.log(test.preOrder());
+test.preOrder(callbackFunc);
+console.log(test.inOrder());
+test.inOrder(callbackFunc);
+console.log(test.postOrder());
+test.postOrder(callbackFunc);
 
 ///////////////Misc functions////////////////////////
 function callbackFunc(node) {
-  console.log(node.data);
+  console.log(node.data * 2);
 }

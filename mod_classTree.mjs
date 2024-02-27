@@ -168,4 +168,48 @@ export default class Tree {
     recursion(queue);
     if (callback === undefined) console.log(returnArr);
   };
+
+  preOrder = (callback, root = this.root) => {
+    if (callback === undefined) {
+      if (root === null) return [];
+      return [root.data].concat(
+        this.preOrder.call(this, callback, root.left),
+        this.preOrder.call(this, callback, root.right)
+      );
+    } else {
+      if (root === null) return;
+      callback(root);
+      this.preOrder.call(this, callback, root.left);
+      this.preOrder.call(this, callback, root.right);
+    }
+  };
+
+  inOrder = (callback, root = this.root) => {
+    if (callback === undefined) {
+      if (root === null) return [];
+      return [...this.inOrder.call(this, callback, root.left)].concat(
+        root.data,
+        this.inOrder.call(this, callback, root.right)
+      );
+    } else {
+      if (root === null) return;
+      this.inOrder.call(this, callback, root.left);
+      callback(root);
+      this.inOrder.call(this, callback, root.right);
+    }
+  };
+
+  postOrder = (callback, root = this.root) => {
+    if (callback === undefined) {
+      if (root === null) return [];
+      return this.postOrder
+        .call(this, callback, root.left)
+        .concat(this.postOrder.call(this, callback, root.right), root.data);
+    } else {
+      if (root === null) return;
+      this.postOrder.call(this, callback, root.left);
+      this.postOrder.call(this, callback, root.right);
+      callback(root);
+    }
+  };
 }
