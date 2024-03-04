@@ -250,4 +250,23 @@ export default class Tree {
     value = recursion(rootNode);
     console.log(value);
   };
+
+  depth = (val, start = this.root) => {
+    if (val === undefined) return "Parameter is missing";
+    let recursion = (node, n) => {
+      if (node === null) return;
+      if (n === node.data) {
+        return 0;
+      } else {
+        n < node.data ? (node = node.left) : (node = node.right);
+        return recursion(node, n) + 1;
+      }
+    };
+    let value = recursion(start, val);
+    if (isNaN(value) === true) {
+      return "Value Not Found";
+    } else {
+      return value;
+    }
+  };
 }

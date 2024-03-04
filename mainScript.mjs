@@ -20,7 +20,8 @@ test.prettyPrint();
 // test.inOrder(callbackFunc);
 // console.log(test.postOrder());
 // test.postOrder(callbackFunc);
-test.height();
+// test.height();
+console.log(test.depth(1000));
 
 ///////////////Misc functions////////////////////////
 function callbackFunc(node) {
