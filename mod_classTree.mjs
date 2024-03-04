@@ -212,4 +212,42 @@ export default class Tree {
       callback(root);
     }
   };
+
+  //for traversal
+  find2 = (val, node = this.root) => {
+    if (val < node.data && node.left !== null) {
+      return this.find2.call(this, val, node.left);
+    } else if (val > node.data && node.right !== null) {
+      return this.find2.call(this, val, node.right);
+    } else if (val === node.data) {
+      return node;
+    } else {
+      console.log("Value not Found");
+      return false;
+    }
+  };
+
+  height = (val) => {
+    let rootNode;
+    val === undefined
+      ? (rootNode = this.root)
+      : (rootNode = this.find2.call(this, val));
+    if (rootNode === false) return;
+    let value = 0;
+    let recursion = (node) => {
+      if (node === null) {
+        return 0;
+      } else if (node !== null) {
+        let lSide = recursion(node.left);
+        let rSide = recursion(node.right);
+        if (lSide > rSide) {
+          return lSide + 1;
+        } else {
+          return rSide + 1;
+        }
+      }
+    };
+    value = recursion(rootNode);
+    console.log(value);
+  };
 }

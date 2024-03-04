@@ -14,12 +14,13 @@ test.prettyPrint();
 // test.levelOrder(callbackFunc);
 // test.levelOrderRec();
 // test.levelOrderRec(callbackFunc);
-console.log(test.preOrder());
-test.preOrder(callbackFunc);
-console.log(test.inOrder());
-test.inOrder(callbackFunc);
-console.log(test.postOrder());
-test.postOrder(callbackFunc);
+// console.log(test.preOrder());
+// test.preOrder(callbackFunc);
+// console.log(test.inOrder());
+// test.inOrder(callbackFunc);
+// console.log(test.postOrder());
+// test.postOrder(callbackFunc);
+test.height();
 
 ///////////////Misc functions////////////////////////
 function callbackFunc(node) {
