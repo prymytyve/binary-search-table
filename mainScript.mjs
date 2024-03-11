@@ -27,10 +27,12 @@ const test = new Tree(array);
 // console.log(test.depth(1000));
 test.delete(51);
 test.delete(70);
-test.prettyPrint();
+// test.prettyPrint();
 // test.isBalanced();
-test.isBalanced();
-
+// test.isBalanced();
+test.prettyPrint();
+test.rebalance();
+test.prettyPrint();
 ///////////////Misc functions////////////////////////
 function callbackFunc(node) {
   console.log(node.data * 2);

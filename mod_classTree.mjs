@@ -321,4 +321,22 @@ export default class Tree {
   //     this.isBalanced.call(this, node.right);
   //   }
   // };
+
+  rebalance = () => {
+    let currentTree = this.inOrder.call();
+
+    let buildTree2 = (array) => {
+      let mid = Math.floor(array.length / 2);
+      let left = array.splice(0, mid);
+      let midVal = array.shift();
+      let right = array;
+      let node = new Node(midVal);
+      node.left = this.buildTree.call(this, left);
+      node.right = this.buildTree.call(this, right);
+      return node;
+    };
+
+    this.root = buildTree2(currentTree);
+    console.log("----------Tree rebalanced----------");
+  };
 }
