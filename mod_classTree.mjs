@@ -80,7 +80,11 @@ export default class Tree {
         ? (parent.left = null)
         : (parent.right = null);
     } //node for parent w/ 1 child........................................................
-    else if (val === node.data && (node.right !== null || node.left !== null)) {
+    else if (
+      val === node.data &&
+      (node.right !== null || node.left !== null) &&
+      (node.right === null || node.left === null)
+    ) {
       if (this.root.data === val) {
         let existingVal = undefined;
         this.root.left.data !== null
@@ -269,4 +273,52 @@ export default class Tree {
       return value;
     }
   };
+
+  //unbalanced = node with 1 child node and grandchild(ren) or node with a child that is not a leaf node
+  //traverse to singleChild node. Run height. if  absoluteValue(lSide - rSide) > 1, unbalanced
+  isBalanced = () => {
+    let balanced;
+    let badNodes = [];
+
+    let recursion = (node) => {
+      if (node === null) {
+        return;
+      } else if (
+        (node.right !== null || node.left !== null) &&
+        (node.right === null || node.left === null)
+      ) {
+        let childNode = node.left || node.right;
+        if (childNode.left !== null || childNode.right !== null) {
+          balanced = false;
+          badNodes.push(node.data);
+        }
+        return;
+      } else {
+        recursion(node.left);
+        recursion(node.right);
+      }
+    };
+
+    recursion(this.root);
+    balanced === false
+      ? console.log("Unbalanced:", badNodes)
+      : console.log("Balanced");
+  };
+
+  // isBalanced2 = (node = this.root) => {
+  //   if (node === null) {
+  //     return;
+  //   } else if (
+  //     (node.right !== null || node.left !== null) &&
+  //     (node.right === null || node.left === null)
+  //   ) {
+  //     let childNode = node.left || node.right;
+  //     if (childNode.left !== null || childNode.right !== null)
+  //       console.log("Unbalanced @ number: " + node.data);
+  //     return;
+  //   } else {
+  //     this.isBalanced.call(this, node.left);
+  //     this.isBalanced.call(this, node.right);
+  //   }
+  // };
 }
