@@ -46,7 +46,8 @@ export default class Tree {
 
   insert = (val, node = this.root) => {
     if (val === node.data) {
-      console.log("Beware of Dupes!");
+      // console.log(node.data + " is a Dupe!");
+      return;
     } else if (val < node.data) {
       node.left === null
         ? (node.left = new Node(val))
@@ -146,17 +147,16 @@ export default class Tree {
       if (currentNode.right !== null) queue.push(currentNode.right);
       let departingNode = queue.shift();
       callback !== undefined
-        ? callback(departingNode)
+        ? returnVal.push(callback(departingNode))
         : returnVal.push(departingNode.data);
     }
-    if (callback === undefined) console.log(returnVal);
+    return returnVal;
   };
 
   levelOrderRec = (callback) => {
     if (this.root === null) return;
     let queue = [this.root];
     let returnArr = [];
-
     let recursion = (q) => {
       if (!q.length) return;
       let currentNode = q[0];
@@ -174,47 +174,27 @@ export default class Tree {
   };
 
   preOrder = (callback, root = this.root) => {
-    if (callback === undefined) {
-      if (root === null) return [];
-      return [root.data].concat(
-        this.preOrder.call(this, callback, root.left),
-        this.preOrder.call(this, callback, root.right)
-      );
-    } else {
-      if (root === null) return;
-      callback(root);
-      this.preOrder.call(this, callback, root.left);
-      this.preOrder.call(this, callback, root.right);
-    }
+    if (root === null) return [];
+    return [callback !== undefined ? callback(root) : root.data].concat(
+      this.preOrder.call(this, callback, root.left),
+      this.preOrder.call(this, callback, root.right)
+    );
   };
 
   inOrder = (callback, root = this.root) => {
-    if (callback === undefined) {
-      if (root === null) return [];
-      return [...this.inOrder.call(this, callback, root.left)].concat(
-        root.data,
-        this.inOrder.call(this, callback, root.right)
-      );
-    } else {
-      if (root === null) return;
-      this.inOrder.call(this, callback, root.left);
-      callback(root);
-      this.inOrder.call(this, callback, root.right);
-    }
+    if (root === null) return [];
+    return [...this.inOrder.call(this, callback, root.left)].concat(
+      callback !== undefined ? callback(root) : root.data,
+      this.inOrder.call(this, callback, root.right)
+    );
   };
 
   postOrder = (callback, root = this.root) => {
-    if (callback === undefined) {
-      if (root === null) return [];
-      return this.postOrder
-        .call(this, callback, root.left)
-        .concat(this.postOrder.call(this, callback, root.right), root.data);
-    } else {
-      if (root === null) return;
-      this.postOrder.call(this, callback, root.left);
-      this.postOrder.call(this, callback, root.right);
-      callback(root);
-    }
+    if (root === null) return [];
+    return [...this.postOrder.call(this, callback, root.left)].concat(
+      this.postOrder.call(this, callback, root.right),
+      callback !== undefined ? callback(root) : root.data
+    );
   };
 
   //for traversal
@@ -303,6 +283,7 @@ export default class Tree {
     balanced === false
       ? console.log("Unbalanced:", badNodes)
       : console.log("Balanced");
+    return balanced;
   };
 
   // isBalanced2 = (node = this.root) => {

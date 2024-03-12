@@ -1,39 +1,40 @@
 import Tree from "./mod_classTree.mjs";
+import { rng, printOrders } from "./mod_driverScriptFuncs.mjs";
 
-const array = [
-  21, 6513, 5, 33, 1, 5, 2, 4, 3, 1000, 7, 51, 6, 0, 1123, 2343, 4345, 20, 40,
-  60, 70, 99, 98, 97, 96,
-];
-// const array1 = [2, 6, 7];
-// const array2 = [6, 3];
-// const array = [6];
-const test = new Tree(array);
+//Driver Script
+function driverScript(numOfData, numOfDataToAdd, callback, min = 1, max = 250) {
+  //step 1: creates tree
+  let initArr = rng(numOfData, min, max);
+  const tree = new Tree(initArr);
 
-// test.insert(8);
-// test.delete();
-// test.prettyPrint();
-// test.find(6);
-// test.levelOrder();
-// test.levelOrder(callbackFunc);
-// test.levelOrderRec();
-// test.levelOrderRec(callbackFunc);
-// console.log(test.preOrder());
-// test.preOrder(callbackFunc);
-// console.log(test.inOrder());
-// test.inOrder(callbackFunc);
-// console.log(test.postOrder());
-// test.postOrder(callbackFunc);
-// test.height();
-// console.log(test.depth(1000));
-test.delete(51);
-test.delete(70);
-// test.prettyPrint();
-// test.isBalanced();
-// test.isBalanced();
-test.prettyPrint();
-test.rebalance();
-test.prettyPrint();
+  //step 2: balance check
+  tree.isBalanced();
+
+  //step 3: print orders
+  printOrders(tree, callback);
+
+  //step 4: insert data
+  let arr2 = rng(numOfDataToAdd, min, max);
+  arr2.forEach((data) => tree.insert(data));
+
+  //step 5: balance check
+  let balanceCheck = tree.isBalanced();
+
+  //step 6: rebalance if unbalanced
+  if (balanceCheck === false) tree.rebalance(); //step 7: balance check
+  tree.isBalanced();
+
+  //step 8: order print
+  printOrders(tree, callback);
+  return tree;
+}
+
+//////////////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+let tree1 = driverScript(15, 10, callbackFunc);
+tree1.prettyPrint();
+
 ///////////////Misc functions////////////////////////
 function callbackFunc(node) {
-  console.log(node.data * 2);
+  return node.data * 2;
 }
