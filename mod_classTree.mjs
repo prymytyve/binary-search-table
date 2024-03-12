@@ -164,13 +164,13 @@ export default class Tree {
       if (currentNode.right !== null) q.push(currentNode.right);
       let departingNode = q.shift();
       callback !== undefined
-        ? callback(departingNode)
+        ? returnArr.push(callback(departingNode))
         : returnArr.push(departingNode.data);
       recursion(q);
     };
 
     recursion(queue);
-    if (callback === undefined) console.log(returnArr);
+    return returnArr;
   };
 
   preOrder = (callback, root = this.root) => {
